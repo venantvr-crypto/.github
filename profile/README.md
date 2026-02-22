@@ -36,6 +36,9 @@ graph LR
 
 ## Stack
 
+[![Stack](https://skillicons.dev/icons?i=python,solidity,docker,linux,git&theme=dark)](https://skillicons.dev)
+
+
 - **Rust** (Actix-Web, rusqlite, binance-rs, tokio) pour la collecte haute performance
 - **Python** (pandas, numpy, ccxt, Flask, NLTK, TextBlob, Web3.py) pour l'analyse
 - **SQLite** comme couche de stockage commune
