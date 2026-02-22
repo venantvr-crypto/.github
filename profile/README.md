@@ -22,19 +22,16 @@ Analyse de marché crypto : collecte haute performance de données OHLCV, signau
 
 ## Pipeline
 
-```
-Collecte                                     Analyse
-────────────────────────────────────────     ────────────────────────────────────
-Rust-Candles-Retriever ──→ SQLite            Python.Correlation.Capitalization
-  · Binance REST API                           · RSI multi-timeframe (ccxt)
-  · Multi-timeframe (5m → 3d)                  · Corrélation de Pearson
-  · Gap-filling automatique                    · Filtrage par capitalisation
-  · Visualiseur TradingView                    · Architecture pub/sub
-
-Python.Crypto ──→ API REST                   Python.FED.Indicator
-  · CoinGecko + TheGraph (GraphQL)             · NLP sur communiqués FED
-  · Web3 on-chain (Ethereum)                   · VADER + TextBlob
-  · Uniswap V2/V3                              · Scoring de sentiment
+```mermaid
+graph LR
+    subgraph Collecte
+        A[Rust-Candles-Retriever<br/><i>Binance · multi-timeframe · gap-filling</i>] -->|OHLCV| DB[(SQLite)]
+        B[Python.Crypto<br/><i>CoinGecko · TheGraph · Web3</i>] -->|DEX data| API[API REST]
+    end
+    subgraph Analyse
+        DB --> C[Python.Correlation.Capitalization<br/><i>RSI · Pearson · ccxt</i>]
+        API --> D[Python.FED.Indicator<br/><i>VADER · TextBlob · NLP</i>]
+    end
 ```
 
 ## Stack
